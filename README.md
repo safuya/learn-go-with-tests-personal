@@ -1,1 +1,3 @@
-# learn-go-with-tests-personal
+# Learn Go With Tests
+
+My learning go repository.
