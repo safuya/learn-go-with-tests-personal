@@ -21,6 +21,27 @@ func TestSearch(t *testing.T) {
 	})
 }
 
+func TestAdd(t *testing.T) {
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		dictionary.Add("test", "this is just a test")
+
+		want := "this is just a test"
+		got, _ := dictionary.Search("test")
+
+		AssertString(t, got, want)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		dictionary := Dictionary{"test": "this is just a test"}
+		err := dictionary.Add("test", "I am immutable")
+		definition, _ := dictionary.Search("test")
+
+		AssertError(t, err, ErrWordExists)
+		AssertString(t, definition, "this is just a test")
+	})
+}
+
 func AssertString(t testing.TB, got, want string) {
 	t.Helper()
 
